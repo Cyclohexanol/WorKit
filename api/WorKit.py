@@ -1,6 +1,6 @@
 import os
 import sqlite3
-from flask import Flask, g
+from flask import Flask, g, jsonify
 
 #APP_CONFIG
 app = Flask(__name__)
@@ -38,6 +38,15 @@ def close_db(error):
 @app.route('/')
 def hello_world():
     return 'Flask Dockerized'
+
+@app.route('/test', methods=['POST'])
+def test_commands():
+    data = request.get_json()
+
+    return jsonify({
+        "response_type": "ephemeral",
+        "text": "This functionality works well!"
+    })
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
