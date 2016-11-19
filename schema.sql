@@ -1,3 +1,5 @@
+PRAGMA foreign_keys=ON;
+
 drop table if exists workers;
 create table workers(
   id INTEGER NOT NULL PRIMARY KEY,
