@@ -12,7 +12,7 @@ app.config.update(dict(
     PASSWORD='admin'
 ))
 
-#Dinamically setting the PORT
+#Dynamically setting the PORT
 port = int(os.getenv('PORT', '5000'))
 
 #CONSTANTS
@@ -64,4 +64,4 @@ def test_commands():
         })
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=port)
