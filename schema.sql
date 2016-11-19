@@ -17,38 +17,44 @@ create table gateways(
 drop table if exists message_log;
 create table message_log(
   id INTEGER NOT NULL PRIMARY KEY,
-  worker_id INTEGER NOT NULL FOREIGN KEY REFERENCES workers(id),
+  worker_id INTEGER NOT NULL,
   timestamp INTEGER,
-  sentiment REAL
+  sentiment REAL,
+  FOREIGN KEY(worker_id) REFERENCES workers(id)
 );
 
 drop table if exists temperature_log;
 create table temperature_log(
   id INTEGER NOT NULL PRIMARY KEY,
-  worker_id INTEGER NOT NULL FOREIGN KEY REFERENCES workers(id),
+  worker_id INTEGER NOT NULL,
   timestamp INTEGER,
-  temperature REAL
+  temperature REAL,
+  FOREIGN KEY(worker_id) REFERENCES workers(id)
 );
 
 drop table if exists button_log;
 create table button_log(
   id INTEGER NOT NULL PRIMARY KEY,
-  worker_id INTEGER NOT NULL FOREIGN KEY REFERENCES workers(id),
-  timestamp INTEGER
+  worker_id INTEGER NOT NULL,
+  timestamp INTEGER,
+  FOREIGN KEY(worker_id) REFERENCES workers(id)
 );
 
 drop table if exists proximity_log;
 create table proximity_log(
   id INTEGER NOT NULL PRIMARY KEY,
-  worker_id INTEGER NOT NULL FOREIGN KEY REFERENCES workers(id),
+  worker_id INTEGER NOT NULL,
   timestamp INTEGER,
-  gateway_id TEXT NOT NULL FOREIGN KEY REFERENCES gateways(id)
+  gateway_id TEXT NOT NULL,
+  FOREIGN KEY(gateway_id) REFERENCES gateways(id),
+  FOREIGN KEY(worker_id) REFERENCES workers(id)
 );
 
 drop table if exists movement_log;
 create table movement_log(
   id INTEGER NOT NULL PRIMARY KEY,
-  worker_id INTEGER NOT NULL FOREIGN KEY REFERENCES workers(id),
+  worker_id INTEGER NOT NULL,
   timestamp INTEGER,
-  movement INTEGER
+  movement INTEGER,
+  FOREIGN KEY(worker_id) REFERENCES workers(id)
 );"""
