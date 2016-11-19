@@ -1,48 +1,47 @@
 """drop table if exists workers;
 create table workers(
-  id INTEGER PRIMARY KEY,
-  button_id INTEGER UNIQUE,
-  proximity_id INTEGER UNIQUE,
-  temperature_id INTEGER UNIQUE,
-  movement_id INTEGER UNIQUE
+  id INTEGER NOT NULL PRIMARY KEY,
+  button_id varchar(64) UNIQUE,
+  proximity_id varchar(64) UNIQUE,
+  temperature_id varchar(64) UNIQUE,
+  movement_id varchar(64) UNIQUE
 );
 
 drop table if exists message_log;
 create table message_log(
-  id INTEGER PRIMARY KEY,
-  worker_id INTEGER,
+  id INTEGER NOT NULL PRIMARY KEY,
+  worker_id INTEGER NOT NULL FOREIGN KEY REFERENCES workers(id),
   timestamp DATETIME,
   sentiment REAL
 );
 
 drop table if exists temperature_log;
 create table temperature_log(
-  id INTEGER PRIMARY KEY,
-  worker_id INTEGER,
+  id INTEGER NOT NULL PRIMARY KEY,
+  worker_id INTEGER NOT NULL FOREIGN KEY REFERENCES workers(id),
   timestamp DATETIME,
   temperature REAL
 );
 
 drop table if exists button_log;
 create table button_log(
-  id INTEGER PRIMARY KEY,
-  worker_id INTEGER,
-  timestamp DATETIME,
-  button INTEGER
+  id INTEGER NOT NULL PRIMARY KEY,
+  worker_id INTEGER NOT NULL FOREIGN KEY REFERENCES workers(id),
+  timestamp DATETIME
 );
 
 drop table if exists proximity_log;
 create table proximity_log(
-  id INTEGER PRIMARY KEY,
-  worker_id INTEGER,
+  id INTEGER NOT NULL PRIMARY KEY,
+  worker_id INTEGER NOT NULL FOREIGN KEY REFERENCES workers(id),
   timestamp DATETIME,
-  proximity REAL
+  gateway varchar(64)
 );
 
 drop table if exists movement_log;
 create table movement_log(
-  id INTEGER PRIMARY KEY,
-  worker_id INTEGER,
+  id INTEGER NOT NULL PRIMARY KEY,
+  worker_id INTEGER NOT NULL FOREIGN KEY REFERENCES workers(id),
   timestamp DATETIME,
-  proximity INTEGER
+  movement INTEGER
 );"""
