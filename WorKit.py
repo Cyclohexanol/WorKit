@@ -84,7 +84,7 @@ def authentication():
     url = ("https://slack.com/api/oauth.access?" +
         "client_id=" + config.client_id +
         "&client_secret=" + config.client_secret +
-        "&code" + request.args['code'] +
+        "&code=" + request.args['code'] +
         "&redirect_uri=" + config.redirect_uri)
 
     return redirect(url)
