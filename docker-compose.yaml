@@ -1,0 +1,10 @@
+version: "2"
+services:
+  api:
+    restart: always
+    build: ./api
+    ports:
+      - 8085:5000
+volumes:
+  data:
+    driver: local
