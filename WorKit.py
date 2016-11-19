@@ -52,8 +52,9 @@ def hello_world():
 @app.route('/test', methods=['POST'])
 def test_commands():
     r = jsonify(request.form)
+    test_token = r['token']
 
-    if token == r['token']:
+    if token == test_token:
 
         response = jsonify({
             "status": "200",
