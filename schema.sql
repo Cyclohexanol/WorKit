@@ -1,4 +1,4 @@
-"""drop table if exists workers;
+drop table if exists workers;
 create table workers(
   id INTEGER NOT NULL PRIMARY KEY,
   team_name TEXT NOT NULL,
@@ -57,4 +57,4 @@ create table movement_log(
   timestamp INTEGER,
   movement INTEGER,
   FOREIGN KEY(worker_id) REFERENCES workers(id)
-);"""
+);

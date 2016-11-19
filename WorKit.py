@@ -1,6 +1,5 @@
 import os
 import sqlite3
-import requests
 from oauth2_config import oauth2_config
 from flask import Flask, g, jsonify, request, redirect
 
