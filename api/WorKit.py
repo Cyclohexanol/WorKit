@@ -24,11 +24,6 @@ def init_db():
         db.cursor().executescript(f.read())
     db.commit()
 
-@app.cli.command('initdb')
-def initdb_command():
-    init_db()
-    print('Initialized the database.')
-
 def get_db():
     if not hasattr(g, 'sqlite_db'):
         g.sqlite_db = connect_db()
