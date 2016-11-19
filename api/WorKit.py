@@ -1,6 +1,6 @@
 import os
 import sqlite3
-from flask import Flask, g, jsonify
+from flask import Flask, g, jsonify, request
 
 #APP_CONFIG
 app = Flask(__name__)
@@ -11,6 +11,9 @@ app.config.update(dict(
     USERNAME='admin',
     PASSWORD='admin'
 ))
+
+#CONSTANTS
+token = "COMMAND TOKENS TO VERIFY ONCE IT'S CREATED"
 
 #DB_UTILS
 def connect_db():
@@ -41,14 +44,16 @@ def hello_world():
 
 @app.route('/test', methods=['POST'])
 def test_commands():
-    data = request.get_json()
+    r = jsonify(request.form)
 
     response = jsonify({
         "response_type": "ephemeral",
         "text": "This functionality works well!"
     })
 
-    return "HTTP/1.1 200 OK\r\nContent-type: application/json\r\n\r\n" + response
+    #"HTTP/1.1 200 OK\r\nContent-type: application/json\r\n\r\n" + response
+
+    return response
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
