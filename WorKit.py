@@ -47,6 +47,7 @@ def test_commands():
     r = jsonify(request.form)
 
     response = jsonify({
+        "status": "200",
         "response_type": "ephemeral",
         "text": "This functionality works well!"
     })
