@@ -43,10 +43,12 @@ def hello_world():
 def test_commands():
     data = request.get_json()
 
-    return jsonify({
+    response = jsonify({
         "response_type": "ephemeral",
         "text": "This functionality works well!"
     })
+
+    return "HTTP/1.1 200 OK\r\nContent-type: application/json\r\n\r\n" + response
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
