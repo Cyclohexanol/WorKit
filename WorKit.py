@@ -13,7 +13,7 @@ app.config.update(dict(
 ))
 
 #CONSTANTS
-token = "COMMAND TOKENS TO VERIFY ONCE IT'S CREATED"
+token = "MP6bV33AHeBEFxDdUBjaoBsG"
 
 #DB_UTILS
 def connect_db():
@@ -46,14 +46,19 @@ def hello_world():
 def test_commands():
     r = jsonify(request.form)
 
-    response = jsonify({
-        "response_type": "ephemeral",
-        "text": "This functionality works well!"
-    })
+    if token == r['token']:
 
-    #"HTTP/1.1 200 OK\r\nContent-type: application/json\r\n\r\n" + response
+        response = jsonify({
+            "status": "200",
+            "response_type": "ephemeral",
+            "text": "This functionality works well!"
+        })
 
-    return response
+        return response
+    else:
+        return jsonify({
+            "status": "failed"
+        })
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
