@@ -8,6 +8,12 @@ create table workers(
   movement_id varchar(64) UNIQUE
 );
 
+drop table if exists gateways:
+create table gateways(
+  id varchar(64) NOT NULL PRIMARY KEY,
+  building varchar(32)
+);
+
 drop table if exists message_log;
 create table message_log(
   id INTEGER NOT NULL PRIMARY KEY,
@@ -36,7 +42,7 @@ create table proximity_log(
   id INTEGER NOT NULL PRIMARY KEY,
   worker_id INTEGER NOT NULL FOREIGN KEY REFERENCES workers(id),
   timestamp DATETIME,
-  gateway varchar(64)
+  gateway_id varchar(64) NOT NULL FOREIGN KEY REFERENCES gateways(id)
 );
 
 drop table if exists movement_log;
