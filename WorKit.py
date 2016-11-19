@@ -1,6 +1,9 @@
 import os
 import sqlite3
-from flask import Flask, g, jsonify, request
+import requests
+from oauth2_config import oauth2_config
+from flask import Flask, g, jsonify, request, redirect
+
 
 #APP_CONFIG
 app = Flask(__name__)
@@ -17,6 +20,7 @@ port = int(os.getenv('PORT', '5000'))
 
 #CONSTANTS
 token = "MP6bV33AHeBEFxDdUBjaoBsG"
+config = oauth2_config(["users:read", "channels:history", "channels:read", "channels:write", "chat:write:bot"], "107526814087.107515751334", "b8b2779318baa62d6e71dd9e2f07e247", "https://workit-py.scapp.io/authenticate")
 
 #DB_UTILS
 def connect_db():
@@ -62,6 +66,30 @@ def test_commands():
         return jsonify({
             "status": "failed"
         })
+
+@app.route('/autorise', methods=['GET'])
+def autorisation():
+    separator = " "
+
+    url = ("https://slack.com/oauth/authorize?" +
+        "client_id=" + config.client_id +
+        "&scope=" + separator.join(config.scopes) +
+        "&redirect_uri=" + config.redirect_uri)
+
+    return redirect(url)
+
+@app.route('/authenticate', methods=['GET'])
+def authentication():
+    separator = " "
+
+    url = ("https://slack.com/api/oauth.access?" +
+        "client_id=" + config.client_id +
+        "&client_secret=" + config.client_secret +
+        "&code" + request.args['code'] +
+        "&redirect_uri=" + config.redirect_uri)
+
+    return redirect(url)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
