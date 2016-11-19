@@ -12,6 +12,9 @@ app.config.update(dict(
     PASSWORD='admin'
 ))
 
+#Dinamically setting the PORT
+port = int(os.getenv('PORT', '5000'))
+
 #CONSTANTS
 token = "MP6bV33AHeBEFxDdUBjaoBsG"
 
