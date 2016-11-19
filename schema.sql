@@ -1,6 +1,7 @@
 """drop table if exists workers;
 create table workers(
   id INTEGER NOT NULL PRIMARY KEY,
+  team_name varchar(64) NOT NULL,
   button_id varchar(64) UNIQUE,
   proximity_id varchar(64) UNIQUE,
   temperature_id varchar(64) UNIQUE,
