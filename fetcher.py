@@ -1,3 +1,4 @@
+import time
 import WorKit
 from slackclient import SlackClient
 
@@ -12,5 +13,6 @@ def loop():
         print("Connection Failed, invalid token?")
 
 def interpret(message):
-    print(message['text'])
-    return NULL
+    if message.__len__() != 0:
+        print(message[0])
+    return None
