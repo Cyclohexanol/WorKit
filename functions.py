@@ -75,6 +75,8 @@ def insertProximityLog(time, worker_id, gateway_id):
 def insertMessageLog(time, worker_id, sentiment):
     query = "SELECT COUNT(*) FROM proximity_log;"
     json_format = ['count']
+    result = fetch_from_DB(json_format, query)['count'][0]
+    print(result)
     id = int(fetch_from_DB(json_format, query)['count'][0]) + 1
     query = "INSERT INTO proximity_log VALUES (" + id + ", " + worker_id + ", " + time + ", " + sentiment + ");"
     insert_into_DB(query)
