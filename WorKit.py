@@ -46,10 +46,10 @@ def initdb_command():
     print('Initialized the database.')
 
 def get_db():
-    with app.app_context():
-        if not hasattr(g, 'sqlite_db'):
-            g.sqlite_db = connect_db()
-        return g.sqlite_db
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = sqlite3.connect(app['DATABASE'])
+    return db
 
 @app.teardown_appcontext
 def close_db(error):
