@@ -75,8 +75,8 @@ def authentication():
 
         return redirect(url)
     elif request.method == 'POST':
-        response = requests.get_json()
-        bot_token = response['bot']['bot_access_token']
+        r = requests.form
+        bot_token = r['bot']['bot_access_token']
         print(bot_token)
         return bot_token
 
