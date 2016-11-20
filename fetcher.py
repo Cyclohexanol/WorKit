@@ -1,5 +1,6 @@
 import json
 import time
+import sensor
 import WorKit
 import datetime
 import requests
