@@ -13,9 +13,6 @@ temperature = sensor("EMSENSORDEVICEFORMAT00000001", "temperature")
 delta = datetime.timedelta(0, 30, 0)
 
 #LOOPS
-def loop():
-    message_loop()
-
 def message_loop():
     if sc.rtm_connect():
         while True:

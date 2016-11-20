@@ -159,5 +159,6 @@ def fixes():
 
 #MAIN
 if __name__ == '__main__':
+    init_db()
     fetcher.message_loop()
     app.run(host='0.0.0.0', port=port)
