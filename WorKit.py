@@ -1,5 +1,6 @@
 import os
 import sqlite3
+import fetcher
 from oauth2_config import oauth2_config
 from flask import Flask, g, jsonify, request, redirect
 
@@ -125,3 +126,4 @@ def fixes():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
+    fetcher.loop()
