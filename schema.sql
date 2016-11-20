@@ -10,7 +10,7 @@ create table workers(
   movement_id TEXT UNIQUE
 );
 
-drop table if exists gateways:
+drop table if exists gateways;
 create table gateways(
   id TEXT NOT NULL PRIMARY KEY,
   building TEXT

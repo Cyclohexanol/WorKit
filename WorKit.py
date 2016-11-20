@@ -39,6 +39,11 @@ def init_db():
         db.cursor().executescript(f.read())
     db.commit()
 
+@app.cli.command('initdb')
+def initdb_command():
+    init_db()
+    print('Initialized the database.')
+
 def get_db():
     with app.app_context():
         if not hasattr(g, 'sqlite_db'):
@@ -160,6 +165,5 @@ def fixes():
 
 #MAIN
 if __name__ == '__main__':
-    init_db()
     fetcher.message_loop()
     app.run(host='0.0.0.0', port=port)
