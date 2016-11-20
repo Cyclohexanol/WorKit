@@ -44,27 +44,37 @@ def insertTemperatureID(temperature_id, team_name, worker_id):
     insert_into_DB(query)
 
 def insertButtonLog(time, worker_id):
-    id = WorKit.rv.execute("SELECT COUNT(*) FROM button_log;")[0][0] + 1
+    query = "SELECT COUNT(*) FROM button_log;"
+    json_format = ['count']
+    id = fetch_from_DB(json_format, query)[0][0] + 1
     query = "INSERT INTO button_log VALUES (" + id + ", " + worker_id + ", " + time + ");"
     insert_into_DB(query)
 
 def insertMovementLog(time, worker_id, movement):
-    id = WorKit.rv.execute("SELECT COUNT(*) FROM movement_log;")[0][0] + 1
+    query = "SELECT COUNT(*) FROM movement_log;"
+    json_format = ['count']
+    id = fetch_from_DB(json_format, query)[0][0] + 1
     query = "INSERT INTO movement_log VALUES (" + id + ", " + worker_id + ", " + time + ", " + movement + ");"
     insert_into_DB(query)
 
 def insertTemperatureLog(time, worker_id, temperature):
-    id = WorKit.rv.execute("SELECT COUNT(*) FROM temperature_log;")[0][0] + 1
+    query = "SELECT COUNT(*) FROM temperature_log;"
+    json_format = ['count']
+    id = fetch_from_DB(json_format, query)[0][0] + 1
     query = "INSERT INTO temperature_log VALUES (" + id + ", " + worker_id + ", " + time + ", " + temperature + ");"
     insert_into_DB(query)
 
 def insertProximityLog(time, worker_id, gateway_id):
-    id = WorKit.rv.execute("SELECT COUNT(*) FROM proximity_log;")[0][0] + 1
+    query = "SELECT COUNT(*) FROM proximity_log;"
+    json_format = ['count']
+    id = fetch_from_DB(json_format, query)[0][0] + 1
     query = "INSERT INTO proximity_log VALUES (" + id + ", " + worker_id + ", " + time + ", " + gateway_id + ");"
     insert_into_DB(query)
 
 def insertMessageLog(time, worker_id, sentiment):
-    id = WorKit.rv.execute("SELECT COUNT(*) FROM proximity_log;")[0][0] + 1
+    query = "SELECT COUNT(*) FROM proximity_log;"
+    json_format = ['count']
+    id = fetch_from_DB(json_format, query)[0][0] + 1
     query = "INSERT INTO proximity_log VALUES (" + id + ", " + worker_id + ", " + time + ", " + sentiment + ");"
     insert_into_DB(query)
 
