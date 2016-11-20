@@ -16,8 +16,7 @@ def loop():
     else:
         print("Connection Failed, invalid token?")
 
-def interpret(input):
-    message = input
+def interpret(message):
     if message.__len__() != 0:
         if 'text' in message[0]:
             headers = {"Ocp-Apim-Subscription-Key":"3cbc1873c0e847a8b951fab2e549a86a",
@@ -30,4 +29,6 @@ def interpret(input):
                 }]
             })
             r = requests.post("https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment", data=data, headers=headers)
+            print(r.json()['documents'][0]['score'])
+            print(message[0]['user'])
         return None
