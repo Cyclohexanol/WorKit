@@ -1,10 +1,10 @@
 import json
 import time
-import sensor
 import WorKit
 import datetime
 import requests
 import functions
+from sensor import *
 from slackclient import SlackClient
 from flask import Flask, g, jsonify, request, redirect
 
