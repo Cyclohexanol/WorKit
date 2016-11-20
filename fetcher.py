@@ -1,9 +1,10 @@
 import time
-import WorKit
+import requests
+from WorKit import *
 from slackclient import SlackClient
 from flask import Flask, g, jsonify, request, redirect
 
-sc = SlackClient(WorKit.bot_token)
+sc = SlackClient(bot_token)
 
 def loop():
     if sc.rtm_connect():
@@ -14,7 +15,7 @@ def loop():
         print("Connection Failed, invalid token?")
 
 def interpret(input):
-    with app.app_context():
+    with app.app_context() and app.test_request_context():
         if input.__len__() != 0:
             message = input[0]
             if 'text' in message:
@@ -28,6 +29,6 @@ def interpret(input):
                     }]
                 })
 
-                r = requests.post("https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment", json, headers)
+                r = requests.post("https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment", data=json, headers=headers)
 
         return None
