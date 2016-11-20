@@ -61,19 +61,23 @@ def autorisation():
 
     return redirect(url)
 
-@app.route('/authenticate', methods=['GET'])
+@app.route('/authenticate', methods=['GET', 'POST'])
 def authentication():
-    separator = " "
+    if request.method == 'GET':
+        separator = " "
 
-    url = ("https://slack.com/api/oauth.access?" +
-        "client_id=" + config.client_id +
-        "&client_secret=" + config.client_secret +
-        "&code=" + request.args['code'] +
-        "&redirect_uri=" + config.redirect_uri)
+        url = ("https://slack.com/api/oauth.access?" +
+            "client_id=" + config.client_id +
+            "&client_secret=" + config.client_secret +
+            "&code=" + request.args['code'] +
+            "&redirect_uri=" + config.redirect_uri)
 
-    response = requests.get(url).json()
-    bot_code = response['bot']['bot_access_token']
-    return redirect(url)
+        return redirect(url)
+    elif request.method == 'POST':
+        response = requests.get_json()
+        bot_code = response['bot']['bot_access_token']
+        return bot_code
+
 
 @app.route('/test', methods=['POST'])
 def test_commands():
