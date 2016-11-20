@@ -47,35 +47,35 @@ def insertTemperatureID(temperature_id, team_name, worker_id):
 def insertButtonLog(time, worker_id):
     query = "SELECT COUNT(*) FROM button_log;"
     json_format = ['count']
-    id = fetch_from_DB(json_format, query)[0][0] + 1
+    id = int(fetch_from_DB(json_format, query)[0][0]) + 1
     query = "INSERT INTO button_log VALUES (" + id + ", " + worker_id + ", " + time + ");"
     insert_into_DB(query)
 
 def insertMovementLog(time, worker_id, movement):
     query = "SELECT COUNT(*) FROM movement_log;"
     json_format = ['count']
-    id = fetch_from_DB(json_format, query)[0][0] + 1
+    id = int(fetch_from_DB(json_format, query)[0][0]) + 1
     query = "INSERT INTO movement_log VALUES (" + id + ", " + worker_id + ", " + time + ", " + movement + ");"
     insert_into_DB(query)
 
 def insertTemperatureLog(time, worker_id, temperature):
     query = "SELECT COUNT(*) FROM temperature_log;"
     json_format = ['count']
-    id = fetch_from_DB(json_format, query)[0][0] + 1
+    id = int(fetch_from_DB(json_format, query)[0][0]) + 1
     query = "INSERT INTO temperature_log VALUES (" + id + ", " + worker_id + ", " + time + ", " + temperature + ");"
     insert_into_DB(query)
 
 def insertProximityLog(time, worker_id, gateway_id):
     query = "SELECT COUNT(*) FROM proximity_log;"
     json_format = ['count']
-    id = fetch_from_DB(json_format, query)[0][0] + 1
+    id = int(fetch_from_DB(json_format, query)[0][0]) + 1
     query = "INSERT INTO proximity_log VALUES (" + id + ", " + worker_id + ", " + time + ", " + gateway_id + ");"
     insert_into_DB(query)
 
 def insertMessageLog(time, worker_id, sentiment):
     query = "SELECT COUNT(*) FROM proximity_log;"
     json_format = ['count']
-    id = fetch_from_DB(json_format, query)[0][0] + 1
+    id = int(fetch_from_DB(json_format, query)[0][0]) + 1
     query = "INSERT INTO proximity_log VALUES (" + id + ", " + worker_id + ", " + time + ", " + sentiment + ");"
     insert_into_DB(query)
 
