@@ -19,8 +19,8 @@ app.config.update(dict(
 port = int(os.getenv('PORT', '5000'))
 
 #CONSTANTS
-bot_token = ""
 app_token = "MP6bV33AHeBEFxDdUBjaoBsG"
+bot_token = "xoxp-107526814087-107526814135-106885232770-3377130743776d9abbc121cd0618c746"
 config = oauth2_config((["users:read", "channels:history", "channels:read", "channels:write", "chat:write:bot",
 "incoming-webhook", "commands", "bot"]), "107526814087.107515751334", "b8b2779318baa62d6e71dd9e2f07e247", "https://workit-py.scapp.io/authenticate")
 
@@ -55,8 +55,8 @@ def hello_world():
 def autorisation():
     separator = " "
 
-    url = ("https://slack.com/oauth/authorize?" +
-        "client_id=" + config.client_id +
+    url = ("https://slack.com/oauth/authorize" +
+        "?client_id=" + config.client_id +
         "&scope=" + separator.join(config.scopes) +
         "&redirect_uri=" + config.redirect_uri)
 
@@ -64,22 +64,27 @@ def autorisation():
 
 @app.route('/authenticate', methods=['GET', 'POST'])
 def authentication():
-    if request.method == 'GET':
-        separator = " "
+    separator = " "
 
-        url = ("https://slack.com/api/oauth.access?" +
-            "client_id=" + config.client_id +
-            "&client_secret=" + config.client_secret +
-            "&code=" + request.args['code'] +
-            "&redirect_uri=" + config.redirect_uri)
+    url = ("https://slack.com/api/oauth.access" +
+        "?client_id=" + config.client_id +
+        "&client_secret=" + config.client_secret +
+        "&code=" + request.args['code'] +
+        "&redirect_uri=" + config.redirect_uri)
 
-        return redirect(url)
-    elif request.method == 'POST':
-        r = requests.form
-        bot_token = r['bot']['bot_access_token']
-        print(bot_token)
-        return bot_token
+    redirect(url)
 
+    return redirect("https://workit-py.scapp.io/connect")
+
+@app.route('/connect')
+def connection():
+    url = ("https://slack.com/api/rtm.start" +
+        "?token=" + app_token +
+        "&no_unreads=false")
+
+    r = requests.get(url).json()
+    connect_url = r['url']
+    return redirect(connect_url)
 
 @app.route('/test', methods=['POST'])
 def test_commands():
