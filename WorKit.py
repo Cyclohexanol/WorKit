@@ -72,19 +72,17 @@ def authentication():
         "&code=" + request.args['code'] +
         "&redirect_uri=" + config.redirect_uri)
 
-    redirect(url)
+    return redirect(url)
 
-    return redirect("https://workit-py.scapp.io/connect")
-
-@app.route('/connect')
-def connection():
-    url = ("https://slack.com/api/rtm.start" +
-        "?token=" + app_token +
-        "&no_unreads=false")
-
-    r = requests.get(url).json()
-    connect_url = r['url']
-    return redirect(connect_url)
+#@app.route('/connect')
+#def connection():
+#    url = ("https://slack.com/api/rtm.start" +
+#        "?token=" + app_token +
+#        "&no_unreads=false")
+#
+#    r = requests.get(url).json()
+#    connect_url = r['url']
+#    return redirect(connect_url)
 
 @app.route('/test', methods=['POST'])
 def test_commands():
