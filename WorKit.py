@@ -19,12 +19,8 @@ app.config.update(dict(
 port = int(os.getenv('PORT', '5000'))
 
 #CONSTANTS
-<<<<<<< HEAD
 bot_token = os.environ['bot_token']
-=======
->>>>>>> 4ea8672de1ef172a44546d6b67f2071d7f1cc569
 app_token = "MP6bV33AHeBEFxDdUBjaoBsG"
-bot_token = "xoxp-107526814087-107526814135-107019067317-6f3f551c663e87e13fd88f0d6fbf311d"
 config = oauth2_config((["users:read", "channels:history", "channels:read", "channels:write", "chat:write:bot",
 "incoming-webhook", "commands", "bot"]), "107526814087.107515751334", "b8b2779318baa62d6e71dd9e2f07e247", "https://workit-py.scapp.io/authenticate")
 
@@ -68,7 +64,7 @@ def autorisation():
 
 @app.route('/authenticate', methods=['GET', 'POST'])
 def authentication():
-<<<<<<< HEAD
+
     if request.method == 'GET':
         separator = " "
 
@@ -83,7 +79,7 @@ def authentication():
         r = request.form
         bot = r['bot']
         return bot_token
-=======
+
     separator = " "
 
     url = ("https://slack.com/api/oauth.access" +
@@ -101,7 +97,6 @@ def connection():
     url = ("https://slack.com/api/rtm.start" +
         "?token=" + app_token +
         "&no_unreads=false")
->>>>>>> 4ea8672de1ef172a44546d6b67f2071d7f1cc569
 
     r = requests.get(url).json()
     connect_url = r['url']
