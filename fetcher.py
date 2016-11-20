@@ -12,5 +12,5 @@ def loop():
         print("Connection Failed, invalid token?")
 
 def interpret(message):
-    console.log(message['text'])
+    print(message['text'])
     return NULL
