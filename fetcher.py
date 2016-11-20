@@ -1,11 +1,11 @@
 import json
 import time
-import requests
 import WorKit
+import requests
 from slackclient import SlackClient
 from flask import Flask, g, jsonify, request, redirect
 
-sc = SlackClient("xoxp-107526814087-107526814135-106257538753-c1bf72ee3f0f3f2ea7501c37af1c3f65")
+sc = SlackClient(WorKit.bot_token)
 
 def loop():
     if sc.rtm_connect():
