@@ -49,22 +49,6 @@ def close_db(error):
 def hello_world():
     return 'Flask Dockerized'
 
-@app.route('/test', methods=['POST'])
-def test_commands():
-    r = request.form
-    test_token = r['token']
-
-    if token == test_token:
-        return jsonify({
-            "status": "200",
-            "response_type": "ephemeral",
-            "text": "This functionality works well!"
-        })
-    else:
-        return jsonify({
-            "status": "failed"
-        })
-
 @app.route('/autorise', methods=['GET'])
 def autorisation():
     separator = " "
@@ -88,6 +72,56 @@ def authentication():
 
     return redirect(url)
 
+@app.route('/test', methods=['POST'])
+def test_commands():
+    r = request.form
+    test_token = r['token']
+
+    if token == test_token:
+        return jsonify({
+            "status": "200",
+            "response_type": "ephemeral",
+            "text": "This functionality works well!"
+        })
+    else:
+        return jsonify({
+            "status": "failed"
+        })
+
+@app.route('/statistics', methods=['POST'])
+def statistics():
+    return jsonify({
+        "status": "200",
+        "response_type": "ephemeral",
+    })
+
+@app.route('/dailystatistics', methods=['POST'])
+def daily_statistics():
+    return jsonify({
+        "status": "200",
+        "response_type": "ephemeral",
+    })
+
+@app.route('/detailedstatistics', methods=['POST'])
+def detailed_statistics():
+    return jsonify({
+        "status": "200",
+        "response_type": "ephemeral",
+    })
+
+@app.route('/report', methods=['POST'])
+def report():
+    return jsonify({
+        "status": "200",
+        "response_type": "ephemeral",
+    })
+
+@app.route('/fixes', methods=['POST'])
+def fixes():
+    return jsonify({
+        "status": "200",
+        "response_type": "ephemeral",
+    })
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
