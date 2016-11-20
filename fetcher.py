@@ -1,13 +1,20 @@
 import json
 import time
 import WorKit
+import datetime
 import requests
 from slackclient import SlackClient
 from flask import Flask, g, jsonify, request, redirect
 
 sc = SlackClient(WorKit.bot_token)
+temperature = sensor("EMSENSORDEVICEFORMAT00000001", "temperature")
+delta = datetime.timedelta(0, 30, 0)
 
+#LOOPS
 def loop():
+    message_loop()
+
+def message_loop():
     if sc.rtm_connect():
         while True:
             message = sc.rtm_read()
@@ -16,6 +23,12 @@ def loop():
     else:
         print("Connection Failed, invalid token?")
 
+def data_loop():
+    while True:
+        get_sensor_data(temperature, datetime.datetime.now())
+        time.sleep(30)
+
+#DATA_PROCESSING
 def interpret(message):
     if message.__len__() != 0:
         if 'text' in message[0]:
@@ -32,3 +45,9 @@ def interpret(message):
             print(r.json()['documents'][0]['score'])
             print(message[0]['user'])
         return None
+
+def get_sensor_data(sensor, datetime):
+    headers = {"token":"saEbYNtHbxZ6ThHE"}
+    url = "lauzhack.ael.li/events/uuid/:uuid/type/:type/minor/:minor/date/:from?/:to?=2016-12-00T00:00:00.0000"
+    sensor_minor = 0
+    params = {"uuid":sensor.uuid, "type":sensor.sensor_type, "minor":sensor_minor, "from":(datetime - delta), "/:to?":datetime}

@@ -157,6 +157,7 @@ def fixes():
         "response_type": "ephemeral",
     })
 
+#MAIN
 if __name__ == '__main__':
     fetcher.loop()
     app.run(host='0.0.0.0', port=port)
