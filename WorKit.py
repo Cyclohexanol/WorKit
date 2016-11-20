@@ -53,7 +53,7 @@ def close_db(error):
 #API_FUNCTIONS
 @app.route('/')
 def hello_world():
-    return 'Flask Dockerized'
+    return 'As empty as my motivation'
 
 @app.route('/autorise', methods=['GET'])
 def autorisation():

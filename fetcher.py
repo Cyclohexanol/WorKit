@@ -3,6 +3,7 @@ import time
 import WorKit
 import datetime
 import requests
+import functions
 from slackclient import SlackClient
 from flask import Flask, g, jsonify, request, redirect
 
@@ -42,9 +43,11 @@ def interpret(message):
                 }]
             })
             r = requests.post("https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment", data=data, headers=headers)
-            print(r.json()['documents'][0]['score'])
-            print(message[0]['user'])
-        return None
+            sentiment = r.json()['documents'][0]['score']
+            worker_id = message[0]['user']
+            time = message[0]['ts']
+
+            functions.insertMessageLog(time, worker_id, sentiment)
 
 def get_sensor_data(sensor, datetime):
     headers = {"token":"saEbYNtHbxZ6ThHE"}
