@@ -20,7 +20,7 @@ port = int(os.getenv('PORT', '5000'))
 
 #CONSTANTS
 app_token = "MP6bV33AHeBEFxDdUBjaoBsG"
-bot_token = "xoxp-107526814087-107526814135-106885232770-3377130743776d9abbc121cd0618c746"
+bot_token = "xoxp-107526814087-107526814135-107019067317-6f3f551c663e87e13fd88f0d6fbf311d"
 config = oauth2_config((["users:read", "channels:history", "channels:read", "channels:write", "chat:write:bot",
 "incoming-webhook", "commands", "bot"]), "107526814087.107515751334", "b8b2779318baa62d6e71dd9e2f07e247", "https://workit-py.scapp.io/authenticate")
 
