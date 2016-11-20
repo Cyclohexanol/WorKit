@@ -21,8 +21,7 @@ def fetch_from_DB(json_format, query):
     cursor = get_db().cursor()
     cursor.execute(query)
     entries = cursor.fetchall()
-    result = format_json(json_format, entries)
-    return json.dumps(result)
+    return format_json(json_format, entries)
 
 def insertGateway(gateway_id, gateway_building):
     query = "INSERT INTO gateways VALUES (" + gateway_id + ", " + gateway_building + ");"
