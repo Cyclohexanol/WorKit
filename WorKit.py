@@ -19,6 +19,7 @@ app.config.update(dict(
 port = int(os.getenv('PORT', '5000'))
 
 #CONSTANTS
+bot_token = ""
 app_token = "MP6bV33AHeBEFxDdUBjaoBsG"
 config = oauth2_config((["users:read", "channels:history", "channels:read", "channels:write", "chat:write:bot",
 "incoming-webhook", "commands", "bot"]), "107526814087.107515751334", "b8b2779318baa62d6e71dd9e2f07e247", "https://workit-py.scapp.io/authenticate")
@@ -76,6 +77,7 @@ def authentication():
     elif request.method == 'POST':
         response = requests.get_json()
         bot_token = response['bot']['bot_access_token']
+        print(bot_token)
         return bot_token
 
 
