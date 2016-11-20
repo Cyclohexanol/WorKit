@@ -1,7 +1,7 @@
 import WorKit
 from slackclient import SlackClient
 
-sc = SlackClient(WorKit.token)
+sc = SlackClient(WorKit.app_token)
 
 def loop():
     if sc.rtm_connect():
