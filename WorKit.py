@@ -30,9 +30,10 @@ sc = SlackClient(bot_token)
 
 #DB_UTILS
 def connect_db():
-    rv = sqlite3.connect(app.config['DATABASE'])
-    rv.row_factory = sqlite3.Row
-    return rv
+    with app.app_context():
+        rv = sqlite3.connect(DB_ADDRESS)
+        rv.row_factory = sqlite3.Row
+        return rv
 
 def init_db():
     with app.app_context():
