@@ -75,8 +75,8 @@ def authentication():
         return redirect(url)
     elif request.method == 'POST':
         response = requests.get_json()
-        bot_code = response['bot']['bot_access_token']
-        return bot_code
+        bot_token = response['bot']['bot_access_token']
+        return bot_token
 
 
 @app.route('/test', methods=['POST'])
