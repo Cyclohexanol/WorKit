@@ -2,7 +2,7 @@ PRAGMA foreign_keys=ON;
 
 drop table if exists workers;
 create table workers(
-  id INTEGER NOT NULL PRIMARY KEY,
+  id TEXT NOT NULL PRIMARY KEY,
   team_name TEXT NOT NULL,
   button_id TEXT UNIQUE,
   proximity_id TEXT UNIQUE,
@@ -19,7 +19,7 @@ create table gateways(
 drop table if exists message_log;
 create table message_log(
   id INTEGER NOT NULL PRIMARY KEY,
-  worker_id INTEGER NOT NULL,
+  worker_id TEXT NOT NULL,
   timestamp INTEGER,
   sentiment REAL,
   FOREIGN KEY(worker_id) REFERENCES workers(id)
@@ -28,7 +28,7 @@ create table message_log(
 drop table if exists temperature_log;
 create table temperature_log(
   id INTEGER NOT NULL PRIMARY KEY,
-  worker_id INTEGER NOT NULL,
+  worker_id TEXT NOT NULL,
   timestamp INTEGER,
   temperature REAL,
   FOREIGN KEY(worker_id) REFERENCES workers(id)
@@ -37,7 +37,7 @@ create table temperature_log(
 drop table if exists button_log;
 create table button_log(
   id INTEGER NOT NULL PRIMARY KEY,
-  worker_id INTEGER NOT NULL,
+  worker_id TEXT NOT NULL,
   timestamp INTEGER,
   FOREIGN KEY(worker_id) REFERENCES workers(id)
 );
@@ -45,7 +45,7 @@ create table button_log(
 drop table if exists proximity_log;
 create table proximity_log(
   id INTEGER NOT NULL PRIMARY KEY,
-  worker_id INTEGER NOT NULL,
+  worker_id TEXT NOT NULL,
   timestamp INTEGER,
   gateway_id TEXT NOT NULL,
   FOREIGN KEY(gateway_id) REFERENCES gateways(id),
@@ -55,7 +55,7 @@ create table proximity_log(
 drop table if exists movement_log;
 create table movement_log(
   id INTEGER NOT NULL PRIMARY KEY,
-  worker_id INTEGER NOT NULL,
+  worker_id TEXT NOT NULL,
   timestamp INTEGER,
   movement INTEGER,
   FOREIGN KEY(worker_id) REFERENCES workers(id)
