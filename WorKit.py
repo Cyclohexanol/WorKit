@@ -16,6 +16,7 @@ app.config.update(dict(
     USERNAME='admin',
     PASSWORD='admin'
 ))
+DB_ADDRESS = os.path.join(app.root_path, 'workit.db')
 
 #Dynamically setting the PORT
 port = int(os.getenv('PORT', '5000'))
@@ -48,7 +49,7 @@ def initdb_command():
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
-        db = g._database = sqlite3.connect(app['DATABASE'])
+        db = g._database = sqlite3.connect(DB_ADDRESS)
     return db
 
 @app.teardown_appcontext
