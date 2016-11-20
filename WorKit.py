@@ -1,6 +1,8 @@
 import os
 import sqlite3
 import fetcher
+import requests
+from slackclient import SlackClient
 from oauth2_config import oauth2_config
 from flask import Flask, g, jsonify, request, redirect
 
@@ -19,10 +21,11 @@ app.config.update(dict(
 port = int(os.getenv('PORT', '5000'))
 
 #CONSTANTS
-bot_token = os.environ['bot_token']
 app_token = "MP6bV33AHeBEFxDdUBjaoBsG"
+bot_token = "xoxp-107526814087-107526814135-106257538753-c1bf72ee3f0f3f2ea7501c37af1c3f65"
 config = oauth2_config((["users:read", "channels:history", "channels:read", "channels:write", "chat:write:bot",
 "incoming-webhook", "commands", "bot"]), "107526814087.107515751334", "b8b2779318baa62d6e71dd9e2f07e247", "https://workit-py.scapp.io/authenticate")
+sc = SlackClient(bot_token)
 
 #DB_UTILS
 def connect_db():
@@ -45,6 +48,7 @@ def get_db():
 def close_db(error):
     if hasattr(g, 'sqlite_db'):
         g.sqlite_db.close()
+
 
 #API_FUNCTIONS
 @app.route('/')
